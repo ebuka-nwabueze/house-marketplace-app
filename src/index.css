@@ -104,6 +104,13 @@ button {
   }
 }
 
+@media (min-width: 1024px){
+  .pageContainer, .profile {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
 .loadingSpinnerContainer {
   position: fixed;
   top: 0;
@@ -673,6 +680,11 @@ button {
 .profileNameActive {
   background-color: rgba(44, 44, 44, 0.1);
 }
+
+/* .profileNameActive:disabled,
+.profileEmailActive:disabled{
+  background-color: #ffffff;
+} */
 
 .profileEmail,
 .profileAddress,
