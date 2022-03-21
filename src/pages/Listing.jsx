@@ -1,12 +1,17 @@
-import { getAuth } from "firebase/auth";
+import { applyActionCode, getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import SwiperCore, { Navigation, Pagination, A11y, Scrollbar } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase.config";
 import shareIcon from "../assets/svg/shareIcon.svg";
-import { list } from "firebase/storage";
+import { toast } from "react-toastify";
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 function Listing() {
   const [listing, setListing] = useState(null);
@@ -28,6 +33,8 @@ function Listing() {
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
+        setLoading(false);
+        toast.error("Listing not found");
       }
     };
 
@@ -35,10 +42,27 @@ function Listing() {
     return () => {};
   }, [params.listingId]);
 
+
+
   if (loading) return <Spinner />;
+
+
   return (
     <main>
-      {/* SLIDER */}
+      <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+        {listing.imgUrls.map((url, index) => (
+          <SwiperSlide key={index}>
+            <div
+              style={{
+                backgroundSize: "cover",
+                background: `url(${listing.imgUrls[index]}) center no-repeat`,
+              }}
+              className="swiperSlideDiv"
+            ></div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
       <div
         className="shareIconDiv"
         onClick={() => {
