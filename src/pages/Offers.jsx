@@ -5,10 +5,9 @@ import {
   getDocs,
   orderBy,
   limit,
-  startAfter,
 } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+
 import { toast } from "react-toastify";
 import ListingItem from "../components/ListingItem";
 import Spinner from "../components/Spinner";
@@ -17,7 +16,7 @@ import { db } from "../firebase.config";
 function Offer() {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
-  const params = useParams();
+
 
   useEffect(() => {
     const getListing = async () => {
