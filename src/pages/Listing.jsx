@@ -1,4 +1,4 @@
-import { applyActionCode, getAuth } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
