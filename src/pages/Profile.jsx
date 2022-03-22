@@ -97,13 +97,19 @@ function Profile() {
   const onDelete = async (listingId) => {
     if (window.confirm("Are you sure you want to delete?")) {
       await deleteDoc(doc(db, "listings", listingId));
+      const updatedListing = listings.filter(({ id }) => {
+        return id !== listingId;
+      });
+      setListings(updatedListing);
+      toast.success("Listing successfully deleted");
+    }else {
+      return
     }
-    const updatedListing = listings.filter(({ id }) => {
-      return id !== listingId;
-    });
-    setListings(updatedListing);
-    toast.success("Listing successfully deleted");
   };
+
+  const onEdit = (id) => {
+    navigate(`/edit-listing/${id}`)
+  }
 
   if (loading) return <Spinner />;
 
@@ -166,6 +172,7 @@ function Profile() {
                   key={id}
                   id={id}
                   onDelete={() => onDelete(id)}
+                  onEdit={() => onEdit(id)}
                 />
               ))}
             </ul>

@@ -42,6 +42,10 @@ function Slider() {
     fetchListing();
   }, []);
 
+  if(listings.length === 0){
+    return <> </>
+  }
+
   if(loading) return <Spinner/>
   
   return  listings && (
@@ -55,8 +59,8 @@ function Slider() {
           }}>
             <div
               style={{
-                backgroundSize: "cover",
                 background: `url(${data.imgUrls[0]}) center no-repeat`,
+                backgroundSize: "cover",
               }}
               className="swiperSlideDiv"
             >
