@@ -14,7 +14,7 @@ The application is built using REACT and firebase for it's backend.
 
 2) Create a .env file with the following variables:
 
--   #### `REACT_APP_GEOCODE_API_KEY` should contain an API geo code for making request to obtain longitude and latitide based on addresses inputted `https://api.github.com`. To create your own key, [Click here](https://console.cloud.google.com/apis/)
+-   #### `REACT_APP_GEOCODE_API_KEY` should contain an API geo code for making request to obtain longitude and latitide based on addresses inputted. To create your own key, [Click here](https://console.cloud.google.com/apis/)
 
 
 3) You can start the application with the following:
