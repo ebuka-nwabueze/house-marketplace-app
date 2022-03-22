@@ -11,17 +11,11 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import Spinner from "../components/Spinner";
-import {
-  addDoc,
-  serverTimestamp,
-  collection,
-  doc,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { serverTimestamp, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase.config";
 
 function EditListing() {
+  // eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [listing, setListing] = useState(null);
@@ -59,32 +53,31 @@ function EditListing() {
 
   const auth = getAuth();
   const navigate = useNavigate();
-  const params = useParams()
+  const params = useParams();
   const isMounted = useRef(true);
 
   useEffect(() => {
-    if (listing && listing.useRef !== auth.currentUser.uid){
-      toast.error("You're not Authorized to make this change")
-      navigate("/")
+    if (listing && listing.useRef !== auth.currentUser.uid) {
+      toast.error("You're not Authorized to make this change");
+      navigate("/");
     }
-
-  }, [])
+  }, [auth.currentUser.uid, navigate, listing]);
 
   // fetch user id to update the form with existing formdata
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     const fetchListing = async () => {
       const docRef = doc(db, "listings", params.listingId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        setListing(docSnap.data())
-        setFormData({...docSnap.data(),address: docSnap.data().location})
-        setLoading(false)
+        setListing(docSnap.data());
+        setFormData({ ...docSnap.data(), address: docSnap.data().location });
+        setLoading(false);
       } else {
         // doc.data() will be undefined in this case
-        navigate("/profile")
-        toast.error("Listing Not Found")
+        navigate("/profile");
+        toast.error("Listing Not Found");
       }
     };
 
@@ -179,6 +172,8 @@ function EditListing() {
               case "running":
                 console.log("Upload is running");
                 break;
+              default:
+                break
             }
           },
           (error) => {
@@ -217,9 +212,9 @@ function EditListing() {
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
 
     // Save data to firestore and redirect
-    const docRef =  doc(db, "listings", params.listingId)
-    await updateDoc(docRef,formDataCopy);
-    console.log(docRef)
+    const docRef = doc(db, "listings", params.listingId);
+    await updateDoc(docRef, formDataCopy);
+    
     toast.success("Listing Updated");
     navigate(`/category/${formDataCopy.type}/${docRef.id}`);
     setLoading(false);

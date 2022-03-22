@@ -27,7 +27,7 @@ function Offer() {
           collection(db, "listings"),
           where("offer", "==", true),
           orderBy("timestamp", "desc"),
-          limit(1)
+          limit(10)
         );
         // create snapshot for the database
         const querySnapshot = await getDocs(q);
@@ -61,7 +61,7 @@ function Offer() {
         where("offer", "==", true),
         orderBy("timestamp", "desc"),
         startAfter(lastFetchedListing),
-        limit(1)
+        limit(10)
       );
       // create snapshot for the database
       const querySnapshot = await getDocs(q);

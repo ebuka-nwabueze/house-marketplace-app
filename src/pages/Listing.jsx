@@ -1,7 +1,7 @@
 import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import SwiperCore, { Navigation, Pagination, A11y, Scrollbar } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,7 +18,6 @@ function Listing() {
   const [loading, setLoading] = useState(true);
   const [shareLinkCopied, setShareLinkCopied] = useState(false);
 
-  const navigate = useNavigate();
   const params = useParams();
   const auth = getAuth();
 
