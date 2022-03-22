@@ -9,6 +9,7 @@ function Contact() {
   const [message, setMessage] = useState("");
   const [landlord, setLandlord] = useState(null);
   const [loading, setLoading] = useState(true);
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
 
   const params = useParams();
@@ -30,7 +31,7 @@ function Contact() {
 
     getLandlord();
     return () => {};
-  }, [params.landlorId]);
+  }, [params.landlordId]);
 
   const onChange = (e) => {
     setMessage(e.target.value);
@@ -74,6 +75,7 @@ function Contact() {
                 "listingName"
               )}&body=${message}`}
               target="_blank"
+              rel="noreferrer"
             ><button onClick={onSendMessage} type="button" className="primaryButton">Send Message</button></a>
           </form>
         </main>
