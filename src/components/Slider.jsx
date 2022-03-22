@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import {
   collection,
   query,
-  where,
   getDocs,
   orderBy,
   limit,
@@ -13,6 +12,8 @@ import {
 import "swiper/swiper-bundle.css";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase.config";
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 function Slider() {
   const [listings, setListings] = useState(null);
